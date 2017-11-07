@@ -246,6 +246,57 @@ for (firstIsKey, secondIsValue) in airlines {
 
 
 // Closures
+// its a chunk of code wrapped in { ... } to be passed into something else.
+
+// Create a Book Struct
+struct Book {
+    var title: String
+    var authorLastName: String
+    var authorFirstName: String
+    var readingAge: Int
+    var pageCount: Int
+}
+// Create books with the struct
+let book1 = Book.init(title: "Where the wild things are", authorLastName: "Sendak", authorFirstName: "Maurice", readingAge: 4, pageCount: 48)
+let book2 = Book.init(title: "The Little Princess", authorLastName: "de-Saint-Expuery", authorFirstName: "Antoine", readingAge: 10, pageCount: 96)
+let book3 = Book.init(title: "Oh, The Places You'll Go", authorLastName: "Seuss", authorFirstName: "Dr.", readingAge: 10, pageCount: 56)
+let book4 = Book.init(title: "Goodnight Moon", authorLastName: "Wise Brown", authorFirstName: "Margaret", readingAge: 1, pageCount: 30)
+let book5 = Book.init(title: "The Hobbit", authorLastName: "Tolkien", authorFirstName: "J.R.R", readingAge: 12, pageCount: 300)
+//put the books in an array
+let allBooks = [book1, book2, book3, book4, book5]
+// our sorting function that sorts by readingAge descending
+func compareTwoBooks(firstBook: Book, secondBook: Book) -> Bool {
+    if firstBook.readingAge <= secondBook.readingAge {
+        return true
+    } else {
+        return false
+    }
+}
+// Pass the sorting function into the sortedBy method
+let ageSortedBooks = allBooks.sorted(by: compareTwoBooks)
+ageSortedBooks
+// now do it with a closure passed into the sorted by function
+
+let pageSortedBooks = allBooks.sorted(by: {
+    (firstBook: Book, secondBook: Book) -> Bool
+    in
+    if firstBook.pageCount >= secondBook.pageCount {
+        return true
+    } else {
+        return false
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
 
