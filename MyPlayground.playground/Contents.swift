@@ -276,7 +276,6 @@ func compareTwoBooks(firstBook: Book, secondBook: Book) -> Bool {
 let ageSortedBooks = allBooks.sorted(by: compareTwoBooks)
 ageSortedBooks
 // now do it with a closure passed into the sorted by function
-
 let pageSortedBooks = allBooks.sorted(by: {
     (firstBook: Book, secondBook: Book) -> Bool
     in
@@ -287,6 +286,14 @@ let pageSortedBooks = allBooks.sorted(by: {
     }
 })
 
+//that is awfully wordy, lets shorten it down
+    //instead of passing the closure inside of the method, lets place it after
+    // this is called a trailing closure.
+    // You don't even need the parenths (by: )
+    // and if the statement returns true of false anyways, then why take a redundant if else statement?
+    // the return is redundant as well!
+    // now the same process as above is shortened to a single line of code.
+let pageSortedBooks2 = allBooks.sorted { $0.readingAge >= $1.readingAge }
 
 
 
