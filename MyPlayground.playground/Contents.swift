@@ -273,7 +273,7 @@ for (firstIsKey, secondIsValue) in airlines {
 }
 
 // -------------------------------------------------------------------
-//                          Closures
+//                             Closures
 // -------------------------------------------------------------------
 
 // its a chunk of code wrapped in { ... } to be passed into something else.
@@ -335,13 +335,151 @@ filteredBooksByAgeOf10
 //                       Classes and Objects
 // -------------------------------------------------------------------
 
+// Defining and instantiating classes
+class Appliance {
+    //properties
+    var manufacturer: String
+    var model: String
+    var voltage: Int
+    var capacity: Int?
+    
+    //initializer
+    init() {
+        self.manufacturer = "default manufacturer"
+        self.model = "default model"
+        self.voltage = 120
+    }
+    //additional initializer
+    init(withVoltage: Int){
+        self.manufacturer = "default manufacturer"
+        self.model = "default model"
+        self.voltage = withVoltage
+    }
+    //custom full initializer
+    init(manuf: String, model: String, volts: Int) {
+        self.manufacturer = manuf
+        self.model = model
+        self.voltage = volts
+    }
+    
+    //deninitializers       --not required. only allowed in a class
+    deinit {
+        // perform cleanup code here
+        // release a file resource
+        // release a network resource
+    }
+    
+    //methods
+    func getDetails() -> String {
+        var message = "This is a \(self.model) from \(self.manufacturer). "
+        if self.voltage >= 220 {
+            message += "This model is intended for European Usage."
+        }
+        return message
+    }
+}
+
+// Later... we create instances of this Appliance class.
+var kettle = Appliance()
+kettle.manufacturer = "Megappliance, Inc"
+kettle.model = "TeaMaster 5000"
+kettle.voltage = 120
+print(kettle.getDetails())
+
+var macBook = Appliance(withVoltage: 260)
+print(macBook.getDetails())
+
+var iMac = Appliance(manuf: "Apple", model: "iMac 2015", volts: 120)
+print(iMac.getDetails())
+
+// These look a lot like structs, and are very similar
+// But the difference is:
+// Structs are value types
+    // which means that when assigning it a new var or const,
+    // the value is copied
+// Classes are reference types
+    // value is not copied, a new reference is passed.
+
+// -------------------------------------------------------------------
+//                     Value vs Reference
+// -------------------------------------------------------------------
+
+// a swift string is a struct -- a value type
+var thisString = "This is some text"
+// if I assign, its a copy of the original value
+var thatString = thisString
+// if I change, it only changes the copied value
+thatString += ", and some extra text here"
+// this does not effect the original
+print(thisString)
+print(thatString)
+
+// a swift class -- a reference type
+class Message {
+    var internalText = "This is some reference type text"
+}
+// create a new instance of the class
+var firstMessage = Message()
+// if I assign, it's a reference to the original instance
+var secondMessage = firstMessage
+secondMessage.internalText += ", with an extra bit at the end here."
+// see how it changed both the second and original?
+print(firstMessage.internalText)
+print(secondMessage.internalText)
 
 
+// -------------------------------------------------------------------
+//                        Inheritance
+// -------------------------------------------------------------------
 
+class Programmer {                              //======Superclass
+    var githubName: String
+    var primaryLanguage: String
+    var devComputer: String
+    var yearsInProgramming: Int
+    init(github: String, lang: String, computer: String, years: Int) {
+        self.githubName = github
+        self.primaryLanguage = lang
+        self.devComputer = computer
+        self.yearsInProgramming = years
+    }
+    func message() -> String {
+        var devLevel: String
+        switch Int(self.yearsInProgramming) {
+        case 0:
+            devLevel = "Junior Developer"
+        case 1:
+            devLevel = "Apprentice Developer"
+        case 2, 3, 4, 5:
+            devLevel = "Software Developer"
+        case 6...100:
+            devLevel = "Senior Developer"
+        default:
+            devLevel = "Lying Developer"
+        }
+        let thisMessage = "Hi, I am a \(devLevel) with \(self.yearsInProgramming) years of experience. I use a \(self.devComputer) to code on and my primary coding language is \(self.primaryLanguage)."
+        return thisMessage
+    }
+}
+// define a new class
+// this class inherits the above properties, methods, and initializers; but you can make new ones as well.
 
-
-
-
+class WebDeveloper: Programmer {                 //=======Subclass
+    //add new properties
+    var webpages: [String]
+    //to add a new initialzier, you must override the init from the superclass
+    override init(github: String, lang: String, computer: String, years: Int, webpages: [String]) {
+        self.githubName = github
+        self.primaryLanguage = lang
+        self.devComputer = computer
+        self.yearsInProgramming = years
+        self.webpages = webpages
+    }
+    //add a new method
+    func myWebpages() {
+        print("I have a few web projects to show you!")
+    }
+}
 
 
 
