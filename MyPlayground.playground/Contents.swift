@@ -1,5 +1,10 @@
 // Learned using Pluralsight
 
+// -------------------------------------------------------------------
+//                          Intro
+// -------------------------------------------------------------------
+
+
 var playerName = "Alice"     //String
 var age = 21                 //Int
 var temperature = 76.8       //float
@@ -9,9 +14,12 @@ age = age + 44
 
 var bonusScore: Int      // type annotation
 
-var sandwichType: String?
+var sandwichType: String?  // optionals
 
-//loops
+// -------------------------------------------------------------------
+//                           loops
+// -------------------------------------------------------------------
+
 
 let bunchOfWords = ["potato", "pancakes", "eggs", "monster", "caffiene", "tea"]
 var number = 7
@@ -35,8 +43,10 @@ for word in bunchOfWords {
 for number in 0...10 {
     print(number)
 }
+// -------------------------------------------------------------------
+//                          range operators
+// -------------------------------------------------------------------
 
-// range operators
 
 let zeroThroughTenInclusive = 0...10  //inclusive range that includes the value on the right and left
 let zeroThroughTenExceptTen = 0..<10  //excluding the value on the right (ten in this case)
@@ -48,17 +58,22 @@ for number in stride(from: 0, through: 256, by: 16) { //strideThrough does inclu
     print(number)
 }
 
+// -------------------------------------------------------------------
+//                      string interpolation
+// -------------------------------------------------------------------
 
-//string interpolation
 let killed = "xXxBallinBoixXx"
 let killedBy = "86_year_old"
 let killedWith = "Frying Pan"
 let byDistance = "3 meters"
 
-let killMessage = "Player \(killed) was killed by \(killedBy) with weapon \(killedWith) from a distance of \(byDistance)"
+let killMessage = "Player \(killed) was shreked by \(killedBy) with weapon \(killedWith) from a distance of \(byDistance)"
 print(killMessage)
 
-//functions
+// -------------------------------------------------------------------
+//                         functions
+// -------------------------------------------------------------------
+
 
 func showMessage(number: Int, name: String) {  //Swift function parameters are constants and cannot be mutated.
     print("the function call worked and your number is \(number), \(name)")
@@ -96,8 +111,10 @@ func calculateDifference(from firstAmount: Int, to secondAmount: Int) -> Int {  
 let result2 = calculateDifference(from: 456, to: 765)               // function is called and labels are "from" and "to"
 print("The difference is: \(result2)")                              // this makes things easier to understand
 
+// -------------------------------------------------------------------
+//                        Enumerations
+// -------------------------------------------------------------------
 
-// Enumerations
 
 enum MediaType {
     case book
@@ -144,7 +161,9 @@ case .elderScrolls(let version):
     print("I am playing The Elder Scrolls \(version)")
 }
 
-//Structs
+// -------------------------------------------------------------------
+//                          Structs
+// -------------------------------------------------------------------
 
 struct Movie {
     //properties
@@ -169,8 +188,11 @@ print(second.releaseYear)
 print(first.summary())
 print(second.summary())
 
-//Dictionaries
-    // keys and values are up to us, whereas in an array they are indexes.
+// -------------------------------------------------------------------
+//                         Dictionaries
+// -------------------------------------------------------------------
+
+// keys and values are up to us, whereas in an array they are indexes.
 //dictionary literal
 var airlines = ["SWA": "Southwest Airlines",
                 "BAW": "British Airways",
@@ -184,7 +206,8 @@ if let choice = airlines["SWA"] {
     print("No matching airline")
 }
 //Add or change
-airlines["DVA"] = "Discovery Airlines"   //Looks for DVA, if found changes the value, if not adds to the dictionary
+airlines["DVA"] = "Discovery Airlines"
+// ^^ Looks for DVA, if found changes the value, if not adds to the dictionary
 airlines
 //remove by setting to nil
 airlines["DVA"] = nil
@@ -201,7 +224,12 @@ var restaurants: [String: String]
 var employees: [Int: String]
 //
 
-//tuple
+// -------------------------------------------------------------------
+//                         Tuples
+// -------------------------------------------------------------------
+
+//tuples are multiple parameters in a single variable or constant
+//they are not type inferred, so they can contain any type.
 for (code, airline) in airlines {
     print(airline + code)
 }
@@ -244,8 +272,10 @@ for (firstIsKey, secondIsValue) in airlines {
     print("The key is \(firstIsKey), and the value is \(secondIsValue)")
 }
 
+// -------------------------------------------------------------------
+//                          Closures
+// -------------------------------------------------------------------
 
-// Closures
 // its a chunk of code wrapped in { ... } to be passed into something else.
 
 // Create a Book Struct
@@ -294,10 +324,16 @@ let pageSortedBooks = allBooks.sorted(by: {
     // the return is redundant as well!
     // now the same process as above is shortened to a single line of code.
 let pageSortedBooks2 = allBooks.sorted { $0.readingAge >= $1.readingAge }
+let pageSortByReadingAge = allBooks.sorted { $0.readingAge <= $1.readingAge }
+let pageSortByLastName = allBooks.sorted { $0.authorLastName.uppercased() <= $1.authorLastName.uppercased() }
 
+// filter by reading age less than 10
+let filteredBooksByAgeOf10 = allBooks.filter { $0.readingAge < 10 }
+filteredBooksByAgeOf10
 
-
-
+// ------------------------------------------------------------------
+//                       Classes and Objects
+// -------------------------------------------------------------------
 
 
 
