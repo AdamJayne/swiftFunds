@@ -437,6 +437,12 @@ class Programmer {                              //======Superclass
     var primaryLanguage: String
     var devComputer: String
     var yearsInProgramming: Int
+    init() {
+        githubName = "Github Username"
+        primaryLanguage = "default Language"
+        devComputer = "development computer"
+        yearsInProgramming = 0
+    }
     init(github: String, lang: String, computer: String, years: Int) {
         self.githubName = github
         self.primaryLanguage = lang
@@ -466,13 +472,15 @@ class Programmer {                              //======Superclass
 
 class WebDeveloper: Programmer {                 //=======Subclass
     //add new properties
-    var webpages: [String]
+    var webpages: [String] = []
     //to add a new initialzier, you must override the init from the superclass
-    override init(github: String, lang: String, computer: String, years: Int, webpages: [String]) {
-        self.githubName = github
-        self.primaryLanguage = lang
-        self.devComputer = computer
-        self.yearsInProgramming = years
+    override init() {
+        super.init()
+        webpages = []
+    }
+    init(github: String, lang: String, computer: String, years: Int, webpages: [String]) {
+
+        super.init(github:github,lang:lang,computer:computer,years:years)
         self.webpages = webpages
     }
     //add a new method
@@ -480,6 +488,46 @@ class WebDeveloper: Programmer {                 //=======Subclass
         print("I have a few web projects to show you!")
     }
 }
+
+
+// -------------------------------------------------------------------
+//                         Extensions
+// -------------------------------------------------------------------
+
+//extending methods for strings
+
+extension String {
+    func removeSpaces() -> String {
+        let filteredCharacters = self.characters.filter { $0 != " " }
+        return String(filteredCharacters)
+    }
+}
+
+var book = "The Martian"
+var potatoMessage = "I walked down the street to see my house in the distance."
+var tomatoMessage = "It was a very boring event. I shouldn't have done it."
+
+print(potatoMessage.removeSpaces())
+print(tomatoMessage.removeSpaces())
+print(book.removeSpaces())
+
+// -------------------------------------------------------------------
+//                     Computed Properties
+// -------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
